@@ -98,6 +98,19 @@ function deleteCookie(name) {
     document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
+function displayEmail() {
+    var logoutTexts = document.getElementsByClassName('wppb-front-end-logout');
+    var email = getEmailFromCookie();
+    for (var i = 0; i < logoutTexts.length; i ++) {
+        logoutTexts[i].childNodes[0].innerHTML = 'You are currently logged in with ' + email + ' ';
+    }
+}
+
+function getEmailFromCookie() {
+    var cookieDict = dissectCookie(document.cookie);
+    return cookieDict['email'];
+}
+
 try {
     commentOnlyIfLoggedIn();
 } catch (err) {}
@@ -107,6 +120,7 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 } else {
     changeMenuOnUserStatus();
 }
+displayEmail();
 
 jQuery('#wppb-submit').on('click', function(){
     addUserToCookie('user_login');
