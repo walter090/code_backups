@@ -24,16 +24,25 @@ function commentOnlyIfLoggedIn() {
 function changeMenuOnUserStatus() {
     var loggedIn = userLoggedIn();
     if (loggedIn) {
-        var menuLink = document.getElementById('menu-item-6297').childNodes[0];
-        menuLink.setAttribute('href', '/profile/');
+//        var menuLink = document.getElementById('menu-item-6297').childNodes[0];
+        var menuLink = document.getElementsByClassName('menu-item-6297');
+        for (var i  = 0; i < menuLink.length; i ++) {
+            menuLink[i].childNodes[0].setAttribute('href', '/profile/');
+        }
         return;
     } else {
-        var menuLink = document.getElementById('menu-item-6297').childNodes[0];
-        menuLink.innerHTML = 'Sign In/Register';
-        menuLink.setAttribute('class', 'login_modal');
+//        var menuLink = document.getElementById('menu-item-6297').childNodes[0];
+        var menuLink = document.getElementsByClassName('menu-item-6297');
+        for (var i = 0; i < menuLink.length; i ++) {
+            menuLink[i].childNodes[0].innerHTML = 'Sign In/Register';
+            menuLink[i].childNodes[0].setAttribute('class', 'login_modal');
+        }
 
-        var signOutLink = document.getElementById('menu-item-6522');
-        signOutLink.style.display = 'none';
+//        var signOutLink = document.getElementById('menu-item-6522');
+        var signOutLink = document.getElementsByClassName('menu-item-6522');
+        for (var i = 0; i < menuLink.length; i ++) {
+            signOutLink[i].style.display = 'none';
+        }
     }
 }
 
@@ -115,11 +124,7 @@ try {
     commentOnlyIfLoggedIn();
 } catch (err) {}
 
-if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-    changeMenuOnUserStatusMobile();
-} else {
-    changeMenuOnUserStatus();
-}
+changeMenuOnUserStatus();
 displayEmail();
 
 jQuery('#wppb-submit').on('click', function(){
