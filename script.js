@@ -4,7 +4,7 @@ function userLoggedIn() {
     // in body element.
     var loggedIn = document.body.getAttribute('class');
     var attrs = loggedIn.split(' ');
-    for (i = 0; i < attrs.length; i ++) {
+    for (i = 0; i < attrs.length; i++) {
         if (attrs[i] === 'logged-in') {
             return true;
         }
@@ -26,21 +26,21 @@ function changeMenuOnUserStatus() {
     if (loggedIn) {
 //        var menuLink = document.getElementById('menu-item-6297').childNodes[0];
         var menuLink = document.getElementsByClassName('menu-item-6297');
-        for (var i  = 0; i < menuLink.length; i ++) {
+        for (var i = 0; i < menuLink.length; i++) {
             menuLink[i].removeAttribute('href');
         }
         return;
     } else {
 //        var menuLink = document.getElementById('menu-item-6297').childNodes[0];
         var menuLink = document.getElementsByClassName('menu-item-6297');
-        for (var i = 0; i < menuLink.length; i ++) {
+        for (var i = 0; i < menuLink.length; i++) {
             menuLink[i].childNodes[0].innerHTML = 'Sign In/Register';
             menuLink[i].childNodes[0].setAttribute('class', 'login_modal');
         }
 
 //        var signOutLink = document.getElementById('menu-item-6522');
         var signOutLink = document.getElementsByClassName('menu-item-6522');
-        for (var i = 0; i < menuLink.length; i ++) {
+        for (var i = 0; i < menuLink.length; i++) {
             signOutLink[i].style.display = 'none';
         }
     }
@@ -73,7 +73,7 @@ function addChatButton(parent) {
 function dissectCookie(cookie) {
     var values = cookie.split('; ');
     var cookieDict = {};
-    for (var i = 0; i < values.length; i ++) {
+    for (var i = 0; i < values.length; i++) {
         key = values[i].split('=')[0];
         value = values[i].split('=')[1];
         cookieDict[key] = value;
@@ -83,7 +83,7 @@ function dissectCookie(cookie) {
 
 function dictToCookie(dict) {
     var appendCookie = '';
-    Object.keys(dict).forEach(function(key) {
+    Object.keys(dict).forEach(function (key) {
         appendCookie += key + '=' + dict[key] + ';';
     });
     return appendCookie;
@@ -119,7 +119,7 @@ function displayEmail() {
     if (email === undefined) {
         return;
     }
-    for (var i = 0; i < logoutTexts.length; i ++) {
+    for (var i = 0; i < logoutTexts.length; i++) {
         logoutTexts[i].childNodes[0].innerHTML = 'You are currently logged in with ' + email + ' ';
     }
 }
@@ -137,7 +137,7 @@ function getFromCookie(cookieKey) {
 function preFill(attr, attrValue, value) {
     targets = jQuery('[' + attr + '=' + attrValue + ']');
     if (userLoggedIn()) {
-        for (var i = 0; i < targets.length; i ++) {
+        for (var i = 0; i < targets.length; i++) {
             targets[i].value = value;
         }
     }
@@ -145,13 +145,14 @@ function preFill(attr, attrValue, value) {
 
 try {
     commentOnlyIfLoggedIn();
-} catch (err) {}
+} catch (err) {
+}
 
 changeMenuOnUserStatus();
 displayEmail();
 preFill('type', 'email', localStorage.email);
 
-jQuery('#loginform').on('submit', function(){
+jQuery('#loginform').on('submit', function () {
 //    addUserToCookie('user_login');
     localStorage.email = document.getElementById('user_login').value;
 });
@@ -159,7 +160,7 @@ jQuery('#user_login').attr('required', 'required');
 jQuery('#uesr_pass').attr('required', 'required');
 
 signOutLinks = document.getElementsByClassName('wppb-logout-url');
-for (var i = 0; i < signOutLinks.length; i ++) {
+for (var i = 0; i < signOutLinks.length; i++) {
     signOutLinks[i].innerHTML = 'Sign out >>';
 }
 
@@ -167,17 +168,18 @@ if (!userLoggedIn()) {
     localStorage.removeItem('email');
 }
 
-if(userLoggedIn()) {
+if (userLoggedIn()) {
     try {
         document.getElementById('error').style.display = 'none';
-    } catch (err) {}
+    } catch (err) {
+    }
 }
 
-if(jQuery('.wppb-error').length !== 0) {
+if (jQuery('.wppb-error').length !== 0) {
     window.location.href = '/sign-in-error/';
 }
 
-if(document.referrer === 'https://wastewise.be/sign-in-error/' && userLoggedIn()) {
+if (document.referrer === 'https://wastewise.be/sign-in-error/' && userLoggedIn()) {
     window.location.href = '/';
 }
 
@@ -189,4 +191,5 @@ if (jQuery('#wppb_form_success_message').length !== 0) {
 
 try {
     document.getElementById('wppb-submit').value = 'Sign In';
-} catch (err) {}
+} catch (err) {
+}
