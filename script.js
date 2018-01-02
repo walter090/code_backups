@@ -135,8 +135,8 @@ function getFromCookie(cookieKey) {
 }
 
 function preFill(attr, attrValue, value) {
-    targets = jQuery('[' + attr + '=' + attrValue + ']');
-    if (userLoggedIn()) {
+    var targets = jQuery('[' + attr + '=' + attrValue + ']');
+    if (userLoggedIn() && value !== undefined) {
         for (var i = 0; i < targets.length; i++) {
             targets[i].value = value;
         }
