@@ -1,11 +1,11 @@
 jQuery(document).ready(function(){
-	targets = document.querySelectorAll('[type="email"]');
-	for (var i = 0; i < targets.length; i ++) {
-		email = getEmailFromCookie();
-		if (email !== undefined) {
-    		targets[i].value = email;
-		}
+    targets = document.querySelectorAll('[type="email"]');
+    for (var i = 0; i < targets.length; i ++) {
+	email = getEmailFromCookie();
+	if (email !== undefined) {
+	targets[i].value = email;
 	}
+    }
 });
 
 function getEmailFromCookie() {
