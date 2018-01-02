@@ -116,6 +116,9 @@ function deleteCookie(name) {
 function displayEmail() {
     var logoutTexts = document.getElementsByClassName('wppb-front-end-logout');
     var email = getEmailFromCookie();
+    if (email === undefined) {
+        return;
+    }
     for (var i = 0; i < logoutTexts.length; i ++) {
         logoutTexts[i].childNodes[0].innerHTML = 'You are currently logged in with ' + email + ' ';
     }
@@ -146,10 +149,11 @@ try {
 
 changeMenuOnUserStatus();
 displayEmail();
-preFill('type', 'email', getEmailFromCookie());
+preFill('type', 'email', localStorage.email);
 
-jQuery('#wppb-submit').on('click', function(){
-    addUserToCookie('user_login');
+jQuery('#loginform').on('submit', function(){
+//    addUserToCookie('user_login');
+    localStorage.email = document.getElementById('user_login').value;
 });
 jQuery('#user_login').attr('required', 'required');
 jQuery('#uesr_pass').attr('required', 'required');
@@ -160,13 +164,29 @@ for (var i = 0; i < signOutLinks.length; i ++) {
 }
 
 if (!userLoggedIn()) {
-    deleteCookie('email');
+    localStorage.removeItem('email');
 }
 
-if (jQuery('.wppb-error').length !== 0) {
-    window.location.replace('/sign-in/');
+if(userLoggedIn()) {
+    try {
+        document.getElementById('error').style.display = 'none';
+    } catch (err) {}
+}
+
+if(jQuery('.wppb-error').length !== 0) {
+    window.location.href = '/sign-in-error/';
+}
+
+if(document.referrer === 'https://wastewise.be/sign-in-error/' && userLoggedIn()) {
+    window.location.href = '/';
 }
 
 if (jQuery('#wppb_form_success_message').length !== 0) {
-    window.location.replace('/registration-success/');
+    window.location.href = '/registration-success/';
+} else if (jQuery('#wppb_general_top_error_message').length !== 0) {
+    window.location.href = '/register/';
 }
+
+try {
+    document.getElementById('wppb-submit').value = 'Sign In';
+} catch (err) {}
