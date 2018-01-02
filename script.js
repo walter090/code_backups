@@ -138,7 +138,7 @@ function preFill(attr, attrValue, value) {
     var targets = jQuery('[' + attr + '=' + attrValue + ']');
     if (userLoggedIn() && value !== undefined) {
         for (var i = 0; i < targets.length; i++) {
-            if (targets[i].attr('name') !== 'NomineesEmail') {
+            if (targets[i].getAttribute('name') !== 'NomineesEmail') {
                 targets[i].value = value;
             }
         }
