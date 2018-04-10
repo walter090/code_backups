@@ -1,0 +1,17 @@
+<?php /* Template Name: post_template */ 
+get_header();
+?>
+<div class="parent">
+	<div class="left-side">
+		<div class="left-head">More by [Author/contributor]</div>
+		[display-posts author="bewastewise" posts_per_page="5" category="Blog"]
+	</div>
+	<div class="middle"><span class="contributors">Contributors: </span><a href="/contributor/john-smith/">[Author/Contributor]</a>
+	[Content here]
+	</div>
+	<div class="right-side"></div>
+</div>
+<?php
+get_sidebar();
+get_footer();
+?>
